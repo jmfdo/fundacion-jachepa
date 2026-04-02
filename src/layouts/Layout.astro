@@ -2,11 +2,19 @@
 const { title, description } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="keywords"
+      content="fundación jachepa, ONG colombia, ONG maicao, ayuda social, comunidades vulnerables, bienestar animal, niñez, educación"
+    />
+    <meta name="author" content="Fundación Jachepa" />
+    <meta name="robots" content="index, follow" />
+    
+
     <title>{title}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -24,24 +32,26 @@ const { title, description } = Astro.props;
 
 <style is:global>
   :root {
-    --color-primario:    #3E2EAC;  /* morado Jachepa */
-    --color-primario-oscuro: #2E2080; /* morado más oscuro para hovers */
-    --color-primario-claro:  #6557C8; /* morado más claro para acentos */
-    --color-primario-suave:  #EEECf9; /* fondo suave derivado del morado */
-    --color-blanco:      #FFFFFF;
-    --color-fondo:       #F7F6FD;  /* blanco con tinte morado muy sutil */
-    --color-texto:       #1A1535;  /* casi negro con tinte morado */
-    --color-texto-suave: #5A5475;  /* gris morado para textos secundarios */
-    --color-borde:       #DDD9F5;
+    --color-primario: #3e2eac; /* morado Jachepa */
+    --color-primario-oscuro: #2e2080; /* morado más oscuro para hovers */
+    --color-primario-claro: #6557c8; /* morado más claro para acentos */
+    --color-primario-suave: #eeecf9; /* fondo suave derivado del morado */
+    --color-blanco: #ffffff;
+    --color-fondo: #f7f6fd; /* blanco con tinte morado muy sutil */
+    --color-texto: #1a1535; /* casi negro con tinte morado */
+    --color-texto-suave: #5a5475; /* gris morado para textos secundarios */
+    --color-borde: #ddd9f5;
 
-    --fuente-titulo: 'Playfair Display', Georgia, serif;
-    --fuente-cuerpo: 'DM Sans', sans-serif;
+    --fuente-titulo: "Playfair Display", Georgia, serif;
+    --fuente-cuerpo: "DM Sans", sans-serif;
 
     --radio: 12px;
     --sombra: 0 4px 24px rgba(62, 46, 172, 0.12);
   }
 
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -59,7 +69,10 @@ const { title, description } = Astro.props;
     -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--fuente-titulo);
     line-height: 1.2;
   }

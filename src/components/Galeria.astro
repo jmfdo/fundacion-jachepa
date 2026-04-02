@@ -37,7 +37,7 @@ const fotos = [
       {fotos.map((foto, i) => (
         <button
           class="galeria__item"
-          data-src={foto.src}
+          data-src={foto.src.src}
           data-alt={foto.alt}
           data-index={i}
           aria-label={`Ver foto: ${foto.alt}`}

@@ -1,5 +1,5 @@
 ---
-const { title, description } = Astro.props;
+const { title, description, ogImage = "./og-image.jpg" } = Astro.props;
 ---
 
 <!doctype html>
@@ -7,13 +7,31 @@ const { title, description } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
     <meta
       name="keywords"
       content="fundación jachepa, ONG colombia, ONG maicao, ayuda social, comunidades vulnerables, bienestar animal, niñez, educación"
     />
     <meta name="author" content="Fundación Jachepa" />
     <meta name="robots" content="index, follow" />
-    
+
+    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content={`https://fundacionjachepa.netlify.app${Astro.url.pathname}`}
+    />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://fundacionjachepa.netlify.app/og-image.jpg" />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content="Fundación Jachepa" />  
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://fundacionjachepa.netlify.app/og-image.jpg" />
 
     <title>{title}</title>
 

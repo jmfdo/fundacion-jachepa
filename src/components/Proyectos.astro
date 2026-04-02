@@ -1,0 +1,202 @@
+---
+const proyectos = [
+  {
+    titulo: "Niñez y Educación",
+    descripcion: "Apoyo al desarrollo integral de niños y niñas en contextos vulnerables.",
+    foto: './child-education.jpeg',
+  },
+  {
+    titulo: "Acción Comunitaria",
+    descripcion: "Fortalecer el tejido social a través de actos de servicio, solidaridad y cercanía con la comunidad.",
+    foto: './community-action.jpeg',
+  },
+  {
+    titulo: "Bienestar Animal",
+    descripcion: "Protección, cuidado y apoyo a animales en condición de vulnerabilidad.",
+    foto: './animal-welfare.jpeg',
+  },
+];
+---
+
+<section class="proyectos" id="proyectos">
+  <div class="proyectos__inner">
+
+    <div class="proyectos__encabezado">
+      <span class="proyectos__tag">Lo que hacemos</span>
+      <h2 class="proyectos__titulo">Nuestros <em>proyectos</em></h2>
+    </div>
+
+    <div class="proyectos__grid">
+      {proyectos.map(p => (
+        <div class="proyecto__card">
+          <div class="proyecto__foto">
+            {p.foto
+              ? <img src={p.foto} alt={p.titulo} />
+              : <div class="proyecto__placeholder">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+                    <polyline points="21 15 16 10 5 21"/>
+                  </svg>
+                  <span>Foto próximamente</span>
+                </div>
+            }
+          </div>
+          <div class="proyecto__info">
+            <h3 class="proyecto__titulo">{p.titulo}</h3>
+            <p class="proyecto__descripcion">{p.descripcion}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .proyectos {
+    padding: 6rem 2rem;
+    background: var(--color-fondo);
+  }
+
+  .proyectos__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  /* Encabezado */
+  .proyectos__encabezado {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .proyectos__tag {
+    display: inline-block;
+    background: var(--color-primario-suave);
+    color: var(--color-primario);
+    padding: 0.35rem 1rem;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    width: fit-content;
+  }
+
+  .proyectos__titulo {
+    font-family: var(--fuente-titulo);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: var(--color-texto);
+    line-height: 1.15;
+  }
+
+  .proyectos__titulo em {
+    font-style: italic;
+    color: var(--color-primario);
+  }
+
+  /* Grid de 3 columnas */
+  .proyectos__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* Card */
+  .proyecto__card {
+    background: var(--color-blanco);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.25s, transform 0.25s;
+  }
+
+  .proyecto__card:hover {
+    box-shadow: var(--sombra);
+    transform: translateY(-5px);
+  }
+
+  /* Foto */
+  .proyecto__foto {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: var(--color-primario-suave);
+  }
+
+  .proyecto__foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform 0.4s ease;
+  }
+
+  .proyecto__card:hover .proyecto__foto img {
+    transform: scale(1.05);
+  }
+
+  .proyecto__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    color: var(--color-primario-claro);
+  }
+
+  .proyecto__placeholder svg {
+    width: 40px;
+    height: 40px;
+    opacity: 0.5;
+  }
+
+  .proyecto__placeholder span {
+    font-size: 0.82rem;
+    opacity: 0.6;
+    font-weight: 500;
+  }
+
+  /* Info */
+  .proyecto__info {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex: 1;
+  }
+
+  .proyecto__titulo {
+    font-family: var(--fuente-titulo);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-texto);
+  }
+
+  .proyecto__descripcion {
+    font-size: 0.95rem;
+    color: var(--color-texto-suave);
+    line-height: 1.7;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .proyectos__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 580px) {
+    .proyectos__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

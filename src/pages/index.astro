@@ -1,17 +1,25 @@
 ---
-
+import Contacto from "../components/Contacto.astro";
+import Footer from "../components/Footer.astro";
+import Galeria from "../components/Galeria.astro";
+import Hero from "../components/Hero.astro";
+import Navbar from "../components/Navbar.astro";
+import Nosotros from "../components/Nosotros.astro";
+import Proyectos from "../components/Proyectos.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+  title="Fundación Jachepa | La fuerza de una nueva generación"
+  description="ONG dedicada al desarrollo social, educativo, ambiental y humanitario de comunidades vulnerables."
+>
+  <Navbar />
+  <main>
+    <Hero />
+    <Nosotros />
+    <Proyectos />
+    <Galeria />
+    <Contacto />
+  </main>
+  <Footer />
+</Layout>

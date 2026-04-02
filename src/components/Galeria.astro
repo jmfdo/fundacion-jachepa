@@ -1,0 +1,370 @@
+---
+const fotos = [
+  { src: "/galeria/1.jpeg",  alt: "Acción comunitaria" },
+  { src: "/galeria/2.jpeg",  alt: "Acción comunitaria" },
+  { src: "/galeria/3.jpeg",  alt: "Bienestar animal" },
+  { src: "/galeria/4.jpeg",  alt: "Bienestar animal" },
+  { src: "/galeria/5.jpeg",  alt: "Bienestar animal" },
+  { src: "/galeria/6.jpeg",  alt: "Bienestar animal" },
+  { src: "/galeria/7.jpeg",  alt: "Bienestar animal" },
+  { src: "/galeria/8.jpeg",  alt: "Bienestar animal" },
+  { src: "/galeria/9.jpeg",  alt: "Bienestar animal" },
+  { src: "/galeria/10.jpeg", alt: "Acción comunitaria" },
+];
+---
+
+<section class="galeria" id="galeria">
+  <div class="galeria__inner">
+
+    <div class="galeria__encabezado">
+      <span class="galeria__tag">Galería</span>
+      <h2 class="galeria__titulo">Momentos que <em>transforman</em></h2>
+    </div>
+
+    <div class="galeria__grid">
+      {fotos.map((foto, i) => (
+        <button
+          class="galeria__item"
+          data-src={foto.src}
+          data-alt={foto.alt}
+          data-index={i}
+          aria-label={`Ver foto: ${foto.alt}`}
+        >
+          <img src={foto.src} alt={foto.alt} loading="lazy" />
+          <div class="galeria__overlay">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+            </svg>
+          </div>
+        </button>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Vista previa de imagen">
+  <button class="lightbox__cerrar" id="lightbox-cerrar" aria-label="Cerrar">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+
+  <button class="lightbox__nav lightbox__nav--prev" id="lightbox-prev" aria-label="Anterior">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+  </button>
+
+  <div class="lightbox__contenido">
+    <img src="" alt="" id="lightbox-img" />
+  </div>
+
+  <button class="lightbox__nav lightbox__nav--next" id="lightbox-next" aria-label="Siguiente">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="9 18 15 12 9 6"/>
+    </svg>
+  </button>
+
+  <div class="lightbox__contador" id="lightbox-contador"></div>
+</div>
+
+<style>
+  .galeria {
+    padding: 6rem 2rem;
+    background: var(--color-blanco);
+  }
+
+  .galeria__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  /* Encabezado */
+  .galeria__encabezado {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .galeria__tag {
+    display: inline-block;
+    background: var(--color-primario-suave);
+    color: var(--color-primario);
+    padding: 0.35rem 1rem;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    width: fit-content;
+  }
+
+  .galeria__titulo {
+    font-family: var(--fuente-titulo);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: var(--color-texto);
+    line-height: 1.15;
+  }
+
+  .galeria__titulo em {
+    font-style: italic;
+    color: var(--color-primario);
+  }
+
+  .galeria__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .galeria__item {
+    display: block;
+    width: 100%;
+    border: none;
+    padding: 0;
+    background: none;
+    cursor: pointer;
+    border-radius: var(--radio);
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 3 / 4;
+  }
+
+  .galeria__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    border-radius: var(--radio);
+    transition: transform 0.4s ease, filter 0.3s ease;
+  }
+
+  .galeria__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(62, 46, 172, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: var(--radio);
+  }
+
+  .galeria__overlay svg {
+    width: 40px;
+    height: 40px;
+    color: #ffffff;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+  }
+
+  .galeria__item:hover img {
+    transform: scale(1.03);
+    filter: brightness(0.85);
+  }
+
+  .galeria__item:hover .galeria__overlay {
+    opacity: 1;
+  }
+
+  /* Lightbox */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(10, 7, 30, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .lightbox.is-open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .lightbox__contenido {
+    max-width: 90vw;
+    max-height: 88vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox__contenido img {
+    max-width: 90vw;
+    max-height: 88vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: var(--radio);
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+    transition: opacity 0.2s ease;
+  }
+
+  .lightbox__cerrar {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+    color: #ffffff;
+  }
+
+  .lightbox__cerrar:hover {
+    background: rgba(255,255,255,0.2);
+  }
+
+  .lightbox__cerrar svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .lightbox__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+    color: #ffffff;
+  }
+
+  .lightbox__nav:hover {
+    background: rgba(255,255,255,0.25);
+  }
+
+  .lightbox__nav svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .lightbox__nav--prev { left: 1.25rem; }
+  .lightbox__nav--next { right: 1.25rem; }
+
+  .lightbox__contador {
+    position: absolute;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.6);
+    font-size: 0.85rem;
+    font-weight: 500;
+    background: rgba(255,255,255,0.08);
+    padding: 0.35rem 1rem;
+    border-radius: 100px;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .galeria__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .galeria__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
+
+<script>
+  const items = document.querySelectorAll('.galeria__item');
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img') as HTMLImageElement;
+  const lbCerrar = document.getElementById('lightbox-cerrar');
+  const lbPrev = document.getElementById('lightbox-prev');
+  const lbNext = document.getElementById('lightbox-next');
+  const lbContador = document.getElementById('lightbox-contador');
+
+  let currentIndex = 0;
+  const fotos = Array.from(items).map(item => ({
+    src: item.getAttribute('data-src') || '',
+    alt: item.getAttribute('data-alt') || '',
+  }));
+
+  function abrirLightbox(index: number) {
+    currentIndex = index;
+    actualizarImagen();
+    lightbox?.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function cerrarLightbox() {
+    lightbox?.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  function actualizarImagen() {
+    if (!lbImg) return;
+    lbImg.style.opacity = '0';
+    setTimeout(() => {
+      lbImg.src = fotos[currentIndex].src;
+      lbImg.alt = fotos[currentIndex].alt;
+      lbImg.style.opacity = '1';
+    }, 150);
+    if (lbContador) {
+      lbContador.textContent = `${currentIndex + 1} / ${fotos.length}`;
+    }
+  }
+
+  function irAnterior() {
+    currentIndex = (currentIndex - 1 + fotos.length) % fotos.length;
+    actualizarImagen();
+  }
+
+  function irSiguiente() {
+    currentIndex = (currentIndex + 1) % fotos.length;
+    actualizarImagen();
+  }
+
+  // Abrir al hacer click en una foto
+  items.forEach((item, i) => {
+    item.addEventListener('click', () => abrirLightbox(i));
+  });
+
+  // Controles
+  lbCerrar?.addEventListener('click', cerrarLightbox);
+  lbPrev?.addEventListener('click', irAnterior);
+  lbNext?.addEventListener('click', irSiguiente);
+
+  // Cerrar al hacer click en el fondo
+  lightbox?.addEventListener('click', (e) => {
+    if (e.target === lightbox) cerrarLightbox();
+  });
+
+  // Navegación con teclado
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox?.classList.contains('is-open')) return;
+    if (e.key === 'Escape') cerrarLightbox();
+    if (e.key === 'ArrowLeft') irAnterior();
+    if (e.key === 'ArrowRight') irSiguiente();
+  });
+</script>

@@ -1,0 +1,237 @@
+---
+---
+
+<section class="nosotros" id="nosotros">
+  <div class="nosotros__inner">
+
+    <div class="nosotros__encabezado">
+      <span class="nosotros__tag">Sobre la fundación</span>
+      <h2 class="nosotros__titulo">Una fundación nacida <em>del corazón</em> de la comunidad</h2>
+    </div>
+
+    <div class="nosotros__grid">
+
+      <!-- Misión -->
+      <div class="nosotros__card">
+        <!-- <div class="nosotros__icono">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="12" r="3"/>
+            <line x1="12" y1="2" x2="12" y2="5"/>
+            <line x1="12" y1="19" x2="12" y2="22"/>
+            <line x1="2" y1="12" x2="5" y2="12"/>
+            <line x1="19" y1="12" x2="22" y2="12"/>
+          </svg>
+        </div> -->
+        <h3 class="nosotros__card-titulo">Misión</h3>
+        <p class="nosotros__card-texto">
+          Promover el desarrollo social, educativo, cultural, ambiental y humanitario de las comunidades vulnerables, mediante la ejecución de programas de ayuda social, educación, alimentación, capacitación, protección animal, apoyo al adulto mayor, niñez y familias en condición de vulnerabilidad, fomentando valores, convivencia, solidaridad, inclusión social y mejoramiento de la calidad de vida.
+        </p>
+      </div>
+
+      <!-- Visión -->
+      <div class="nosotros__card">
+        <!-- <div class="nosotros__icono">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </div> -->
+        <h3 class="nosotros__card-titulo">Visión</h3>
+        <p class="nosotros__card-texto">
+          Convertirnos en una organización social, educativa y humanitaria reconocida por su compromiso con la comunidad y el servicio a la población más vulnerable, trabajando en programas de ayuda social, educación, alimentación, salud, cultura, deporte, medio ambiente, protección animal y desarrollo comunitario, buscando siempre el bienestar y el mejoramiento de la calidad de vida de las personas.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Valores -->
+    <!-- <div class="nosotros__valores">
+      <h3 class="nosotros__valores-titulo">Nuestros valores</h3>
+      <div class="nosotros__valores-grid">
+        {[
+          { icono: "🤝", label: "Solidaridad" },
+          { icono: "🌱", label: "Compromiso" },
+          { icono: "❤️", label: "Inclusión" },
+          { icono: "🕊️", label: "Convivencia" },
+          { icono: "⭐", label: "Valores" },
+          { icono: "🌍", label: "Humanidad" },
+        ].map(v => (
+          <div class="nosotros__valor">
+            <span class="nosotros__valor-icono">{v.icono}</span>
+            <span class="nosotros__valor-label">{v.label}</span>
+          </div>
+        ))}
+      </div>
+    </div> -->
+
+  </div>
+</section>
+
+<style>
+  .nosotros {
+    padding: 6rem 2rem;
+    background: var(--color-blanco);
+  }
+
+  .nosotros__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+  }
+
+  /* Encabezado */
+  .nosotros__encabezado {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 620px;
+  }
+
+  .nosotros__tag {
+    display: inline-block;
+    background: var(--color-primario-suave);
+    color: var(--color-primario);
+    padding: 0.35rem 1rem;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    width: fit-content;
+  }
+
+  .nosotros__titulo {
+    font-family: var(--fuente-titulo);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: var(--color-texto);
+    line-height: 1.15;
+  }
+
+  .nosotros__titulo em {
+    font-style: italic;
+    color: var(--color-primario);
+  }
+
+  /* Cards misión / visión */
+  .nosotros__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .nosotros__card {
+    background: var(--color-fondo);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+    padding: 2.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: box-shadow 0.25s, transform 0.25s;
+  }
+
+  .nosotros__card:hover {
+    box-shadow: var(--sombra);
+    transform: translateY(-4px);
+  }
+
+  .nosotros__icono {
+    width: 48px;
+    height: 48px;
+    background: var(--color-primario-suave);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primario);
+    flex-shrink: 0;
+  }
+
+  .nosotros__icono svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .nosotros__card-titulo {
+    font-family: var(--fuente-titulo);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-texto);
+  }
+
+  .nosotros__card-texto {
+    font-size: 0.97rem;
+    color: var(--color-texto-suave);
+    line-height: 1.75;
+  }
+
+  /* Valores */
+  /* .nosotros__valores {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .nosotros__valores-titulo {
+    font-family: var(--fuente-titulo);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-texto);
+  }
+
+  .nosotros__valores-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+  }
+
+  .nosotros__valor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1.25rem 1rem;
+    background: var(--color-fondo);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+    transition: background 0.2s, transform 0.2s;
+    cursor: default;
+  }
+
+  .nosotros__valor:hover {
+    background: var(--color-primario-suave);
+    transform: translateY(-3px);
+  }
+
+  .nosotros__valor-icono {
+    font-size: 1.75rem;
+  }
+
+  .nosotros__valor-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-texto);
+    text-align: center;
+  } */
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .nosotros__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .nosotros__valores-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .nosotros__valores-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,15 +1,27 @@
 ---
+import { Image } from "astro:assets";
+import g1 from '../assets/images/galeria/1.jpeg';
+import g2 from '../assets/images/galeria/2.jpeg';
+import g3 from '../assets/images/galeria/3.jpeg';
+import g4 from '../assets/images/galeria/4.jpeg';
+import g5 from '../assets/images/galeria/5.jpeg';
+import g6 from '../assets/images/galeria/6.jpeg';
+import g7 from '../assets/images/galeria/7.jpeg';
+import g8 from '../assets/images/galeria/8.jpeg';
+import g9 from '../assets/images/galeria/9.jpeg';
+import g10 from '../assets/images/galeria/10.jpeg';
+
 const fotos = [
-  { src: "/galeria/1.jpeg",  alt: "Acción comunitaria" },
-  { src: "/galeria/2.jpeg",  alt: "Acción comunitaria" },
-  { src: "/galeria/3.jpeg",  alt: "Bienestar animal" },
-  { src: "/galeria/4.jpeg",  alt: "Bienestar animal" },
-  { src: "/galeria/5.jpeg",  alt: "Bienestar animal" },
-  { src: "/galeria/6.jpeg",  alt: "Bienestar animal" },
-  { src: "/galeria/7.jpeg",  alt: "Bienestar animal" },
-  { src: "/galeria/8.jpeg",  alt: "Bienestar animal" },
-  { src: "/galeria/9.jpeg",  alt: "Bienestar animal" },
-  { src: "/galeria/10.jpeg", alt: "Acción comunitaria" },
+  { src: g1,  alt: "Acción comunitaria" },
+  { src: g2,  alt: "Acción comunitaria" },
+  { src: g3,  alt: "Bienestar animal" },
+  { src: g4,  alt: "Bienestar animal" },
+  { src: g5,  alt: "Bienestar animal" },
+  { src: g6,  alt: "Bienestar animal" },
+  { src: g7,  alt: "Bienestar animal" },
+  { src: g8,  alt: "Bienestar animal" },
+  { src: g9,  alt: "Bienestar animal" },
+  { src: g10, alt: "Acción comunitaria" },
 ];
 ---
 
@@ -30,7 +42,7 @@ const fotos = [
           data-index={i}
           aria-label={`Ver foto: ${foto.alt}`}
         >
-          <img src={foto.src} alt={foto.alt} loading="lazy" />
+          <Image src={foto.src} alt={foto.alt} width={600} height={800} loading="lazy" />
           <div class="galeria__overlay">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
@@ -366,5 +378,25 @@ const fotos = [
     if (e.key === 'Escape') cerrarLightbox();
     if (e.key === 'ArrowLeft') irAnterior();
     if (e.key === 'ArrowRight') irSiguiente();
+  });
+
+  // Skeleton en imágenes de galería
+  document.querySelectorAll('.galeria__item img').forEach(img => {
+    const el = img as HTMLImageElement;
+    const parent = el.parentElement;
+    if (!parent) return;
+
+    // Insertar skeleton
+    const skeleton = document.createElement('div');
+    skeleton.classList.add('skeleton-overlay');
+    parent.appendChild(skeleton);
+
+    // Quitar cuando carga
+    if (el.complete) {
+      skeleton.remove();
+    } else {
+      el.addEventListener('load', () => skeleton.remove());
+      el.addEventListener('error', () => skeleton.remove());
+    }
   });
 </script>
